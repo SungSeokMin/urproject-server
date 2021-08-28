@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
-    origin: 'https://urproject.netlify.app',
+    origin: 'https://urproject.netlify.app/',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
   })
@@ -34,6 +34,11 @@ const boardRouter = require('./routes/board-route');
 
 app.use('/board', boardRouter);
 app.use('/user', userRouter);
+
+app.get('/', (req, res) => {
+  req.session.userId = 'hi';
+  res.send('success');
+});
 
 app.listen(PORT, () => {
   console.log(`Server Start on port ${PORT}`);
