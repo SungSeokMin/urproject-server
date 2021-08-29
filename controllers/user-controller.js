@@ -4,13 +4,14 @@ const UserModule = {
   login: async (req, res) => {
     const { email, password } = req.body;
     const emailCheck = await userModel.findUser(email);
+    console.log('emailCheck', emailCheck);
 
     if (emailCheck === false) {
       return res.send({ message: 'email check' });
     }
 
     const getNickname = await userModel.loginUser({ email, password });
-    console.log(getNickname);
+    console.log('getNickname', getNickname);
     if (getNickname === false) {
       return res.send({ message: 'password check' });
     } else {
@@ -18,10 +19,7 @@ const UserModule = {
 
       req.session.user = nickname;
 
-      req.session.save(function (err) {
-        if (err) throw err;
-        return res.status(200).send({ message: 'login Ok', nickname });
-      });
+      return res.status(200).send({ message: 'login Ok', nickname });
     }
   },
 
