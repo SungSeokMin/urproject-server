@@ -43,5 +43,3 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server Start on port ${PORT}`);
 });
-
-// 실행
