@@ -45,7 +45,7 @@ const UserModule = {
       });
     }
 
-    const findEmail = await userModel.findEmail(email);
+    const findEmail = await userModel.findUser(email);
 
     if (findEmail === true) {
       return res.send({
