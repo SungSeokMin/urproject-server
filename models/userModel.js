@@ -4,7 +4,6 @@ const userModels = {
   findUser: async (email) => {
     try {
       const conn = await connect();
-      console.log(conn);
       const emailCheckSql = `
          SELECT * FROM users where email = ?;
       `;

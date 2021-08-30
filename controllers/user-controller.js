@@ -45,6 +45,14 @@ const UserModule = {
       });
     }
 
+    const findEmail = await userModel.findEmail(email);
+
+    if (findEmail === true) {
+      return res.send({
+        message: 'email already exist',
+      });
+    }
+
     try {
       const insertUser = await userModel.signup({ email, password, nickname });
 
@@ -54,12 +62,7 @@ const UserModule = {
         res.status(201).send({
           message: 'signup Ok',
         });
-      } else if (message === 'Fail') {
-        return res.send({
-          message: 'email already exist',
-        });
       } else {
-        console.log('else fail');
         res.send({ message: 'Fail' });
       }
     } catch (err) {
