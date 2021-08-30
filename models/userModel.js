@@ -57,7 +57,7 @@ const userModels = {
       const { email, password, nickname } = userInfo;
 
       const insertUserInfoSql = `
-        INSERT INTO users SET email=?, password=?, nickname=?
+        INSERT INTO users SET email=?, password=?, nickname=?, createdAt = now(), updatedAt = now()
       `;
       await conn.query(insertUserInfoSql, [email, password, nickname]);
       return { message: 'Success' };

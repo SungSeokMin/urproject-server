@@ -2,7 +2,7 @@ const { createPool } = require('mysql2/promise');
 
 async function connect() {
   const connection = await createPool({
-    host: '3.81.226.228',
+    host: '34.229.97.86',
     user: 'seokmin',
     password: '1234',
     database: 'urproject',

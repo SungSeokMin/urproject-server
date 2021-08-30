@@ -54,10 +54,13 @@ const UserModule = {
         res.status(201).send({
           message: 'signup Ok',
         });
-      } else {
+      } else if (message === 'Fail') {
         return res.send({
           message: 'email already exist',
         });
+      } else {
+        console.log('else fail');
+        res.send({ message: 'Fail' });
       }
     } catch (err) {
       return err;
