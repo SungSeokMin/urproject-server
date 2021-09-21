@@ -23,21 +23,25 @@ const BoardModule = {
     const boardId = req.url.slice(1);
     const boardInfo = await boardModel.boardDetail(boardId);
 
-    return res.status(200).send(boardInfo);
+    return res.status(200).send(...boardInfo);
   },
 
   update: async (req, res) => {
-    const boardId = req.url.slice(1);
-    const { title, thumbnail, content } = req.body;
+    const { id, title, thumbnail, content } = req.body;
 
-    const message = await boardModel.modify({ boardId, title, thumbnail, content });
+    const message = await boardModel.modify({
+      id,
+      title,
+      thumbnail,
+      content,
+    });
 
     return res.status(200).send(message);
   },
   delete: async (req, res) => {
-    const boardId = req.url.slice(1);
+    const id = req.url.slice(1);
 
-    const message = await boardModel.delete(boardId);
+    const message = await boardModel.delete(id);
 
     return res.status(200).send(message);
   },

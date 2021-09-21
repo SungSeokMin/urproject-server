@@ -14,7 +14,7 @@ const userModels = {
       }
       return false;
     } catch (err) {
-      return err;
+      return false;
     }
   },
   findNickname: async (nickname) => {

@@ -2,6 +2,8 @@ const connect = require('../database');
 
 const boardModels = {
   create: async (boardInfo) => {
+    let { nickname, thumbnail, title, content } = boardInfo;
+
     try {
       // TODO : 카드에 정보 입력 해주기
       const conn = await connect();
@@ -11,12 +13,7 @@ const boardModels = {
         VALUES (?, ?, ?, ?);
       `;
 
-      await conn.query(insertSql, [
-        boardInfo.nickname,
-        boardInfo.thumbnail,
-        boardInfo.title,
-        boardInfo.content,
-      ]);
+      await conn.query(insertSql, [nickname, thumbnail, title, content]);
 
       return true;
     } catch (err) {
@@ -75,12 +72,12 @@ const boardModels = {
   modify: async (modifyInfo) => {
     const conn = await connect();
     try {
-      const { boardId, title, thumbnail, content } = modifyInfo;
+      const { id, title, thumbnail, content } = modifyInfo;
 
       const modifySql = `
         UPDATE board SET title = ?, thumbnail = ?, content = ? WHERE id = ?;
       `;
-      await conn.query(modifySql, [title, thumbnail, content, boardId]);
+      await conn.query(modifySql, [title, thumbnail, content, id]);
 
       return 'Success Modify';
     } catch (err) {

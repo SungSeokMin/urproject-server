@@ -3,17 +3,17 @@ const userModel = require('../models/userModel');
 const UserModule = {
   login: async (req, res) => {
     const { email, password } = req.body;
+
     const emailCheck = await userModel.findUser(email);
-    console.log('emailCheck', emailCheck);
 
     if (emailCheck === false) {
-      return res.send({ message: 'email check' });
+      return res.status(409).send({ message: 'email check' });
     }
 
     const getNickname = await userModel.loginUser({ email, password });
-    console.log('getNickname', getNickname);
-    if (getNickname === false) {
-      return res.send({ message: 'password check' });
+
+    if (!getNickname) {
+      return res.status(409).send({ message: 'password check' });
     } else {
       const nickname = getNickname;
 
@@ -68,6 +68,20 @@ const UserModule = {
     } catch (err) {
       return err;
     }
+  },
+  findEmail: async (req, res) => {
+    const { email } = req.params;
+
+    const check = await userModel.findUser(email);
+
+    return check ? res.send(true) : res.send(false);
+  },
+  findNickname: async (req, res) => {
+    const { nickname } = req.params;
+
+    const check = await userModel.findNickname(nickname);
+
+    return check ? res.send(true) : res.send(false);
   },
 };
 
