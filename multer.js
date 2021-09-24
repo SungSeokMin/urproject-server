@@ -9,7 +9,7 @@ const s3 = new aws.S3();
 const upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'urproject-image',
+    bucket: 'urproject-images',
     acl: 'public-read',
     key: function (req, file, cb) {
       cb(
